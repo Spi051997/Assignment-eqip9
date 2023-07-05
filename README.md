@@ -1,6 +1,6 @@
 # Assignment-eqip9
 
-# User Database
+# Database Name: User
 
 This repository contains the code for the "User" database. The database is designed to store information about users for a web application.
 
@@ -10,13 +10,12 @@ The "User" database consists of the following table:
 
 ### users
 
-| Field         | Type        | Description                   |
-|---------------|-------------|-------------------------------|
-| id            | INT         | Unique identifier for a user   |
-| firstName     | VARCHAR     | First name of the user        |
-| lastName      | VARCHAR     | Last name of the user         |
-| mobileNumber  | VARCHAR     | Phone number of the user      |
-| password      | VARCHAR     | Password of the user          |
+| Field         | Type               | Description                   |
+|---------------|------------- ------|-------------------------------|  
+| firstName     | VARCHAR            | First name of the user        |
+| lastName      | VARCHAR            | Last name of the user         |
+| mobileNumber  | VARCHAR(Primary)   | Phone number of the user      |
+| password      | VARCHAR             | Password of the user         |
 
 ## Usage
 
@@ -30,8 +29,38 @@ To set up the "User" database, you will need to:
 2. Create a new database named "User".
 3. Create the "users" table with the specified structure.
 
-You can then integrate this database with your web application to handle user registration and login processes.
+  CREATE TABLE users (
+     firstName VARCHAR(255) NOT NULL,
+     lastName VARCHAR(255) NOT NULL,
+     mobileNumber VARCHAR(14) PRIMARY KEY,
+     password VARCHAR(255) NOT NULL,
+     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     createdBy VARCHAR(255),
+      updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      updatedBy VARCHAR(255)
+     );
+ 
+  Then intergrated with userRegistration API and userLogin API
 
+  #userRegistration API
+    http://localhost:4000/api
+  #payload  
+    {
+  "firstName": "Shanti",
+  "lastName": "Pitliya",
+  "mobileNumber": "9461048810",
+  "password": "securePassword"
+  }
+
+
+  #userLogin API
+  http://localhost:4000/api/login
+  #payload
+  {
+      "mobileNumber": "9461048820",
+      "password": "securePassword"
+} 
+  
 ## Contributing
 
 If you would like to contribute to the development of this database or have any suggestions, feel free to submit a pull request or open an issue.
