@@ -21,7 +21,7 @@ The "User" database is intended to be used with a web application that requires 
 
 To set up the "User" database, follow these steps:
 
-1. Install a relational database management system (e.g., MySQL, PostgreSQL).
+1. Install a relational database management system (MySQL).
 2. Create a new database named "User".
 3. Execute the following SQL statement to create the "users" table:
 
