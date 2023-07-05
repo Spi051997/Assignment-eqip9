@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import FacebookLogin from "@greatsumini/react-facebook-login";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
 
 const Registration = () => {
   const toast = useToast();
@@ -30,7 +30,6 @@ const Registration = () => {
       password
     );
 
-
     setFirstName("");
     setLastName("");
     setMobileNumber("");
@@ -48,10 +47,9 @@ const Registration = () => {
     }
   };
 
-
-    const handleGoogleLoginSuccess = async (credentialResponse) => {
-       if(credentialResponse){
-       }
+  const handleGoogleLoginSuccess = async (credentialResponse) => {
+    if (credentialResponse) {
+    }
   };
 
   const handleGoogleLoginError = () => {

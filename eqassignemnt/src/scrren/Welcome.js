@@ -7,7 +7,7 @@ const Welcome = () => {
   const location = useLocation();
   // console.log(location)
   const mobileNumber = location.state?.mobileNumber || "";
-  const [firstName,setfirstName]=useState("")
+  const [firstName, setfirstName] = useState("");
   const [lastName, setlastName] = useState("");
   const [greeting, setGreeting] = useState("");
 
@@ -20,12 +20,11 @@ const Welcome = () => {
   useEffect(() => {
     const fetchDate = async () => {
       const data = await response();
-      setfirstName(data.firstname)
+      setfirstName(data.firstname);
       setlastName(data.lastname);
-
     };
     fetchDate();
-  },[]);
+  }, []);
 
   useEffect(() => {
     const currentTime = new Date();
@@ -48,14 +47,12 @@ const Welcome = () => {
 
   return (
     <div className="WelcomeHome">
-       <button type="submit" className="buttonRegister" onClick={handlelogout}>
+      <button type="submit" className="buttonRegister" onClick={handlelogout}>
         Logout
       </button>
       <div className="welcomename">
-        👋 {greeting}  Mr. {firstName} {lastName}
+        👋 {greeting} Mr. {firstName} {lastName}
       </div>
-
-     
     </div>
   );
 };
