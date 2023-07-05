@@ -77,7 +77,6 @@ Here is some sample data that can be stored in the "users" table:
 | Dilip     | Dutt     | 9461048820   | $2b$10$lsJPlr2UP9iLtY8QSwluR.DOKrs1FeQA6jxBHyC6.YBGX9heNm1Ii | 2023-07-04 14:31:27  | admin     | 2023-07-04 14:31:27  | admin     |
 | John      | Doe      | 9527750859   | $2b$10$isqtF
 
-Sure! Here's the properly formatted content for the `README.md` file:
 
 ```markdown
 # User Database
