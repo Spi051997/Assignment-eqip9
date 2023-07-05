@@ -42,9 +42,9 @@ To set up the "User" database, you will need to:
  
   Then intergrated with userRegistration API and userLogin API
 
-  ##userRegistration API
+  ## userRegistration API
     http://localhost:4000/api
-  #payload  
+  ## payload  
     {
   "firstName": "Shanti",
   "lastName": "Pitliya",
@@ -53,13 +53,24 @@ To set up the "User" database, you will need to:
   }
 
 
-  #userLogin API
+  ## userLogin API
   http://localhost:4000/api/login
   #payload
   {
       "mobileNumber": "9461048820",
       "password": "securePassword"
 } 
+
+
+## Result
++-----------+----------+--------------+--------------------------------------------------------------+---------------------+-----------+---------------------+-----------+
+| firstName | lastName | mobileNumber | password                                                     | createdAt           | createdBy | updatedAt           | updatedBy |
++-----------+----------+--------------+--------------------------------------------------------------+---------------------+-----------+---------------------+-----------+
+| John      | Doe      | 1234567890   | securePassword                                               | 2023-07-04 13:26:43 | admin     | 2023-07-04 13:26:43 | admin     |
+| Dilip     | Dutt     | 7976545805   | $2b$10$YIlJgjMxc/kUJW2qsoiMo.zyHok3FA5.qDhJEq0.ifu684.AlFEZ. | 2023-07-04 13:38:59 | admin     | 2023-07-04 13:38:59 | admin     |
+| Dilip     | Dutt     | 9461048820   | $2b$10$lsJPlr2UP9iLtY8QSwluR.DOKrs1FeQA6jxBHyC6.YBGX9heNm1Ii | 2023-07-04 14:31:27 | admin     | 2023-07-04 14:31:27 | admin     |
+| John      | Doe      | 9527750859   | $2b$10$isqtF.59bckrxghpEhGto.XLj5FJx4kmlof6pKtM8gDvylcZ2TC/e | 2023-07-04 13:37:47 | admin     | 2023-07-04 13:37:47 | admin     |
++-----------+----------+--------------+--------------------------------------------------------------+---------------------+-----------+---------------------+-----------
   
 ## Contributing
 
