@@ -63,19 +63,82 @@ To set up the "User" database, you will need to:
 
 
 ## Result
-+-----------+----------+--------------+--------------------------------------------------------------+---------------------+-----------+---------------------+-----------+
-| firstName | lastName | mobileNumber | password                                                     | createdAt           | createdBy | updatedAt           | updatedBy |
-+-----------+----------+--------------+--------------------------------------------------------------+---------------------+-----------+---------------------+-----------+
-| John      | Doe      | 1234567890   | securePassword                                               | 2023-07-04 13:26:43 | admin     | 2023-07-04 13:26:43 | admin     |
-| Dilip     | Dutt     | 7976545805   | $2b$10$YIlJgjMxc/kUJW2qsoiMo.zyHok3FA5.qDhJEq0.ifu684.AlFEZ. | 2023-07-04 13:38:59 | admin     | 2023-07-04 13:38:59 | admin     |
-| Dilip     | Dutt     | 9461048820   | $2b$10$lsJPlr2UP9iLtY8QSwluR.DOKrs1FeQA6jxBHyC6.YBGX9heNm1Ii | 2023-07-04 14:31:27 | admin     | 2023-07-04 14:31:27 | admin     |
-| John      | Doe      | 9527750859   | $2b$10$isqtF.59bckrxghpEhGto.XLj5FJx4kmlof6pKtM8gDvylcZ2TC/e | 2023-07-04 13:37:47 | admin     | 2023-07-04 13:37:47 | admin     |
-+-----------+----------+--------------+--------------------------------------------------------------+---------------------+-----------+---------------------+-----------
+| firstName | lastName | mobileNumber | password                                                | createdAt            | createdBy | updatedAt            | updatedBy |
+|-----------|----------|--------------|---------------------------------------------------------|----------------------|-----------|----------------------|-----------|
+| John      | Doe      | 1234567890   | securePassword                                          | 2023-07-04 13:26:43  | admin     | 2023-07-04 13:26:43  | admin     |
+| Dilip     | Dutt     | 7976545805   | $2b$10$YIlJgjMxc/kUJW2qsoiMo.zyHok3FA5.qDhJEq0.ifu684.AlFEZ. | 2023-07-04 13:38:59  | admin     | 2023-07-04 13:38:59  | admin     |
+| Dilip     | Dutt     | 9461048820   | $2b$10$lsJPlr2UP9iLtY8QSwluR.DOKrs1FeQA6jxBHyC6.YBGX9heNm1Ii | 2023-07-04 14:31:27  | admin     | 2023-07-04 14:31:27  | admin     |
+| John      | Doe      | 9527750859   | $2b$10$isqtF.59bckrxghpEhGto.XLj5FJx4kmlof6pKtM8gDvylcZ2TC/e | 2023-07-04 13:37:47  | admin     | 2023-07-04 13:37:47  | admin     |
+
   
-## Contributing
+## Stored ProceDure
 
-If you would like to contribute to the development of this database or have any suggestions, feel free to submit a pull request or open an issue.
+CREATE TABLE userRegister (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  firstname VARCHAR(50) NOT NULL,
+  lastname VARCHAR(50) NOT NULL,
+  mobilenumber VARCHAR(15) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  created_by VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_by VARCHAR(50),
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY (mobilenumber)
+);
 
+Prcedure
+DELIMITER //
+CREATE PROCEDURE sp_crudUsers(
+  IN action VARCHAR(10),
+  IN p_id INT,
+  IN p_firstname VARCHAR(50),
+  IN p_lastname VARCHAR(50),
+  IN p_mobilenumber VARCHAR(15),
+  IN p_password VARCHAR(100),
+  IN p_created_by VARCHAR(50),
+  IN p_updated_by VARCHAR(50)
+)
+BEGIN
+  CASE action
+    WHEN 'SELECT' THEN
+      SELECT * FROM userRegister;
+    WHEN 'CREATE' THEN
+      INSERT INTO userRegister (firstname, lastname, mobilenumber, password, created_by)
+      VALUES (p_firstname, p_lastname, p_mobilenumber, p_password, p_created_by);
+    WHEN 'UPDATE' THEN
+      UPDATE userRegister SET firstname = p_firstname, lastname = p_lastname, mobilenumber = p_mobilenumber,
+      password = p_password, updated_by = p_updated_by, updated_at = CURRENT_TIMESTAMP
+      WHERE id = p_id;
+    WHEN 'DELETE' THEN
+      DELETE FROM userRegister WHERE id = p_id;
+    ELSE
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Invalid action provided.';
+  END CASE;
+END //
+DELIMITER ;
+
+## Created   REST API  from above Stored Procedure  and kept in below path:
+path:src\crudAPI\crud.js
+#FETCH  User:http://localhost:4000/user/fetchuser
+#CRETE USER:http://localhost:4000/user/register
+#payload:
+{
+  "firstname": "Heeta",
+  "lastname": "Thakur",
+  "mobilenumber": "1235678950",
+  "password": "securePassword123"
+}
+#UPdate Use Info:http://localhost:4000/user/update/1
+#payload
+{
+  "firstname": "Sanju ",
+  "lastname": "Jhadav",
+  "mobilenumber": "9876543210",
+  "password": "1234",
+  "updated_by": "JohnDoe"
+}
+#Delete User:http://localhost:4000/user/delete/1
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as permitted by the license.
