@@ -120,17 +120,17 @@ DELIMITER ;
 
 ## Created   REST API  from above Stored Procedure  and kept in below path:
 path:src\crudAPI\crud.js
-#FETCH  User:http://localhost:4000/user/fetchuser
-#CRETE USER:http://localhost:4000/user/register
-#payload:
+## FETCH  User:http://localhost:4000/user/fetchuser
+## CRETE USER:http://localhost:4000/user/register
+## payload:
 {
   "firstname": "Heeta",
   "lastname": "Thakur",
   "mobilenumber": "1235678950",
   "password": "securePassword123"
 }
-#UPdate Use Info:http://localhost:4000/user/update/1
-#payload
+## Update Use Info:http://localhost:4000/user/update/1
+## payload
 {
   "firstname": "Sanju ",
   "lastname": "Jhadav",
@@ -138,7 +138,10 @@ path:src\crudAPI\crud.js
   "password": "1234",
   "updated_by": "JohnDoe"
 }
-#Delete User:http://localhost:4000/user/delete/1
+## Delete User:http://localhost:4000/user/delete/1
+
+## FRONT END
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as permitted by the license.
