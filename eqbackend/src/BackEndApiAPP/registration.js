@@ -2,19 +2,13 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const db=require('../../dbConnection')
 // hasing Npm Package
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 require('dotenv').config();
-
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root123',
-  database: 'User',
-});
-
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 

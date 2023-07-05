@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../../src/scrren/Regis.css';
+import '../../src/scrren/Login.css';
 import Imagebackground from '../images/backgrond.png';
 import { login } from '../scrren/API/apiURL';
 import { useNavigate } from "react-router-dom";
@@ -78,7 +78,7 @@ const Login = () => {
               <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="inputText" />
               <br />
               <br />
-              <button type="submit" className="buttonRegister" onClick={handleRegistration}>
+              <button type="submit" className="buttonRegisterr" onClick={handleRegistration}>
                 Login
               </button>
               {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}

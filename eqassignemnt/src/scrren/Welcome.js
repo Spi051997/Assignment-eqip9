@@ -32,11 +32,11 @@ const Welcome = () => {
     const currentHour = currentTime.getHours();
 
     if (currentHour >= 4 && currentHour < 12) {
-      setGreeting("Good Morning");
+      setGreeting("🌄 Good Morning");
     } else if (currentHour >= 12 && currentHour < 18) {
-      setGreeting("Good Afternoon");
+      setGreeting("🕛 Good Afternoon");
     } else {
-      setGreeting("Good  Evening");
+      setGreeting("🌃 Good  Evening");
     }
   }, []);
 
@@ -48,13 +48,14 @@ const Welcome = () => {
 
   return (
     <div className="WelcomeHome">
-      <div>
-        {greeting} {firstName} {lastName}
-      </div>
-
-      <button type="submit" className="buttonRegister" onClick={handlelogout}>
+       <button type="submit" className="buttonRegister" onClick={handlelogout}>
         Logout
       </button>
+      <div className="welcomename">
+        👋 {greeting}  Mr. {firstName} {lastName}
+      </div>
+
+     
     </div>
   );
 };

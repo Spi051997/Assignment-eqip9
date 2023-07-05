@@ -51,9 +51,7 @@ const Registration = () => {
 
     const handleGoogleLoginSuccess = async (credentialResponse) => {
        if(credentialResponse){
-        // navigate("/dashboard");
        }
-
   };
 
   const handleGoogleLoginError = () => {
@@ -102,7 +100,7 @@ const Registration = () => {
               {/* <br /> */}
               <button
                 type="submit"
-                className="buttonRegister"
+                className="buttonRegisterr"
                 onClick={handleRegistration}
               >
                 Register
