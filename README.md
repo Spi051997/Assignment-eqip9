@@ -42,7 +42,7 @@ To set up the "User" database, you will need to:
  
   Then intergrated with userRegistration API and userLogin API
 
-  #userRegistration API
+  ##userRegistration API
     http://localhost:4000/api
   #payload  
     {
