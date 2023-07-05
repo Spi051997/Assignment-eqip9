@@ -163,9 +163,15 @@ Here is some sample data that can be stored in the "users" table:
 
 2b$10$isqtF.59bckrxghpEhGto.XLj5FJx4kmlof6pKtM8gDvylcZ2TC/e | 2023-07-04 13:37:47  | admin     | 2023-07-04 13:37:47  | admin     |
 
-## License
+## Front End
 
-This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as permitted by the license.
-```
+The front end integration for the web application has been completed. The following features have been implemented:
 
-Please copy and paste this content into your `README.md` file. Adjust any formatting or wording as necessary.
+- Google Login button: Users can log in using their Google accounts.
+- Facebook Login button: Users can log in using their Facebook accounts.
+
+## Note
+
+Please note that Apple Login has not been implemented due to the unavailability of a personal Apple account. 
+
+Please make sure to review and adjust the content to accurately reflect the integration and any additional information specific to your project.
