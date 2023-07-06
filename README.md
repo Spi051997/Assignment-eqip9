@@ -134,9 +134,10 @@ DELIMITER ;
 
 ## API  using the above Procedure
 
- **GET User ** :http://localhost:4000/user/fetchuser
+ **GET User** :http://localhost:4000/user/fetchuser
  
- **Create User** :http://localhost:4000/user/register
+ **CreateUser** :http://localhost:4000/user/registe
+ 
  **Payload:**
   ```json
   {
