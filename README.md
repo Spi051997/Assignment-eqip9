@@ -58,13 +58,13 @@ CREATE TABLE users (
 
 **Endpoint:** `http://localhost:4000/api/login`
 
-**Payload:**
-```json
-{
-  "mobileNumber": "9461048820",
-  "password": "securePassword"
-}
-```
+  **Payload:**
+  ```json
+  {
+    "mobileNumber": "9461048820",
+    "password": "securePassword"
+  }
+  ```
 
 ## Sample Data
 
@@ -96,71 +96,69 @@ The "User" database consists of the following table:
 | mobileNumber  | VARCHAR(Primary)  | Phone number of the user    |
 | password      | VARCHAR           | Password of the user        |
 
-## Usage
 
-The database is intended to be used with a web application that requires user registration and login functionality. The "users" table stores basic user information such as their name, phone number, and password.
-
-## Setup
-
-To set up the "User" database, you will need to:
-
-1. Install a relational database management system (MySQL server and Bench).
-2. Create a new database named "User".
-3. Create the "users" table with the specified structure.
+## SQL Procedure for CRUD operations
 
 ```sql
-CREATE TABLE users (
-  firstName VARCHAR(255) NOT NULL,
-  lastName VARCHAR(255) NOT NULL,
-  mobileNumber VARCHAR(14) PRIMARY KEY,
-  password VARCHAR(255) NOT NULL,
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  createdBy VARCHAR(255),
-  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  updatedBy VARCHAR(255)
-);
+DELIMITER //
+CREATE PROCEDURE sp_crudUsers(
+  IN action VARCHAR(10),
+  IN p_id INT,
+  IN p_firstname VARCHAR(50),
+  IN p_lastname VARCHAR(50),
+  IN p_mobilenumber VARCHAR(15),
+  IN p_password VARCHAR(100),
+  IN p_created_by VARCHAR(50),
+  IN p_updated_by VARCHAR(50)
+)
+BEGIN
+  CASE action
+    WHEN 'SELECT' THEN
+      SELECT * FROM userRegister;
+    WHEN 'CREATE' THEN
+      INSERT INTO userRegister (firstname, lastname, mobilenumber, password, created_by)
+      VALUES (p_firstname, p_lastname, p_mobilenumber, p_password, p_created_by);
+    WHEN 'UPDATE' THEN
+      UPDATE userRegister SET firstname = p_firstname, lastname = p_lastname, mobilenumber = p_mobilenumber,
+      password = p_password, updated_by = p_updated_by, updated_at = CURRENT_TIMESTAMP
+      WHERE id = p_id;
+    WHEN 'DELETE' THEN
+      DELETE FROM userRegister WHERE id = p_id;
+    ELSE
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Invalid action provided.';
+  END CASE;
+END //
+DELIMITER ;
 ```
 
-4. Integrate the userRegistration API and userLogin API.
+## API  using the above Procedure
 
-### userRegistration API
+ **GET User ** :http://localhost:4000/user/fetchuser
+ 
+ **Create User** :http://localhost:4000/user/register
+ **Payload:**
+  ```json
+  {
+    "firstname": "Heeta",
+  "lastname": "Thakur",
+  "mobilenumber": "1235678950",
+  "password": "securePassword123"
+  }
+  ```
+ **Update User**:http://localhost:4000/user/update/1
 
-**Endpoint:** `http://localhost:4000/api`
-
-**Payload:**
-```json
-{
-  "firstName": "Shanti",
-  "lastName": "Pitliya",
-  "mobileNumber": "9461048810",
-  "password": "securePassword"
-}
-```
-
-### userLogin API
-
-**Endpoint:** `http://localhost:4000/api/login`
-
-**Payload:**
-```json
-{
-  "mobileNumber": "9461048820",
-  "password": "securePassword"
-}
-```
-
-## Sample Data
-
-Here is some sample data that can be stored in the "users" table:
-
-| firstName | lastName | mobileNumber | password                                                | createdAt            | createdBy | updatedAt            | updatedBy |
-|-----------|----------|--------------|---------------------------------------------------------|----------------------|-----------|----------------------|-----------|
-| John      | Doe      | 1234567890   | securePassword                                          | 2023-07-04 13:26:43  | admin     | 2023-07-04 13:26:43  | admin     |
-| Dilip     | Dutt     | 7976545805   | $2b$10$YIlJgjMxc/kUJW2qsoiMo.zyHok3FA5.qDhJEq0.ifu684.AlFEZ. | 2023-07-04 13:38:59  | admin     | 2023-07-04 13:38:59  | admin     |
-| Dilip     | Dutt     | 9461048820   | $2b$10$lsJPlr2UP9iLtY8QSwluR.DOKrs1FeQA6jxBHyC6.YBGX9heNm1Ii | 2023-07-04 14:31:27  | admin     | 2023-07-04 14:31:27  | admin     |
-| John      | Doe      | 9527750859   | $
-
-2b$10$isqtF.59bckrxghpEhGto.XLj5FJx4kmlof6pKtM8gDvylcZ2TC/e | 2023-07-04 13:37:47  | admin     | 2023-07-04 13:37:47  | admin     |
+ **Payload:**
+  ```json
+  {
+   "firstname": "Sanju ",
+    "lastname": "Jhadav",
+    "mobilenumber": "9876543210",
+    "password": "1234",
+    "updated_by": "JohnDoe"
+  }
+ ```
+**Delete User**: http://localhost:4000/user/delete/1
 
 ## Front End
 
@@ -171,6 +169,4 @@ The front end integration for the web application has been completed. The follow
 
 ## Note
 
-Please note that Apple Login has not been implemented due to the unavailability of a personal Apple account. 
-
-Please make sure to review and adjust the content to accurately reflect the integration and any additional information specific to your project.
+Please note that **Apple Login** has not been implemented due to the unavailability of a personal Apple account. 
