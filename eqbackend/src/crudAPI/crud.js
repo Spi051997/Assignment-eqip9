@@ -11,6 +11,8 @@ const db = require("../../dbConnection");
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+
+// Register Users:
 router.post("/register", (req, res) => {
   const { firstname, lastname, mobilenumber, password } = req.body;
   const callProcedureQuery =
@@ -28,6 +30,8 @@ router.post("/register", (req, res) => {
   );
 });
 
+
+ // FetchD Users
 router.get("/fetchuser", (req, res) => {
   const callProcedureQuery =
     'CALL sp_crudUsers("SELECT", null, null, null, null, null, null, null)';
@@ -43,6 +47,7 @@ router.get("/fetchuser", (req, res) => {
   });
 });
 
+// update User
 router.put("/update/:id", (req, res) => {
   const { id } = req.params;
   const { firstname, lastname, mobilenumber, password, updated_by } = req.body;
@@ -61,6 +66,7 @@ router.put("/update/:id", (req, res) => {
   );
 });
 
+// Delete User:
 router.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   const callProcedureQuery = 'CALL sp_crudUsers("DELETE", ?)';
